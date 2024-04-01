@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Set;
 import java.util.UUID;
 
-import static jakarta.persistence.FetchType.LAZY;
 import static org.hibernate.Length.LONG;
 
 
@@ -17,8 +16,11 @@ public class Contacts {
     @Id
     private UUID id;
 
-    @ManyToOne(fetch=LAZY)
-    private UserAccount userId;
+    @OneToMany(mappedBy=UserAccount_.USER_CONTACT)
+    private Set<UserAccount> userAccount;
+
+    @OneToMany(mappedBy =UserAccount_.FRIEND_CONTACT)
+    private Set<UserAccount> friendAccount;
 
     @Column(length=LONG)
     private String notes;
