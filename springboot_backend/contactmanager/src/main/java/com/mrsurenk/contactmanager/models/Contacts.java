@@ -1,6 +1,5 @@
 package com.mrsurenk.contactmanager.models;
 
-import com.mrsurenk.contactmanager.models.CustomField_;
 import jakarta.persistence.*;
 import lombok.Data;
 
