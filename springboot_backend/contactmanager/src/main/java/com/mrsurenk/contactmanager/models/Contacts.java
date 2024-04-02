@@ -1,11 +1,12 @@
 package com.mrsurenk.contactmanager.models;
 
+import com.mrsurenk.contactmanager.models.CustomField_;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Set;
-import java.util.UUID;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
 import static org.hibernate.Length.LONG;
 
 
@@ -14,7 +15,8 @@ import static org.hibernate.Length.LONG;
 public class Contacts {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
     private UserAccount userAccount;
@@ -25,9 +27,11 @@ public class Contacts {
     @Column(length=LONG)
     private String notes;
 
-    private boolean deleted;
+    private boolean deleted; //for soft delete
 
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
 
+    @OneToMany(mappedBy= CustomField_.CONTACT)
+    private Set<CustomField> customField;
 }
