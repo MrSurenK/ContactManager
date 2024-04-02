@@ -16,11 +16,11 @@ public class Contacts {
     @Id
     private UUID id;
 
-    @OneToMany(mappedBy=UserAccount_.USER_CONTACT)
-    private Set<UserAccount> userAccount;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private UserAccount userAccount;
 
-    @OneToMany(mappedBy =UserAccount_.FRIEND_CONTACT)
-    private Set<UserAccount> friendAccount;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private UserAccount friendAccount;
 
     @Column(length=LONG)
     private String notes;

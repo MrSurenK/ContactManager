@@ -1,9 +1,11 @@
 package com.mrsurenk.contactmanager.models;
 
+import com.mrsurenk.contactmanager.models.Contacts_;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -15,15 +17,11 @@ public class UserAccount {
     @GeneratedValue
     private UUID id;
 
-//    ToDO: Figure out the rls between this table and Contacts table and fix the issue with mapping.
+    @OneToMany(mappedBy= Contacts_.USER_ACCOUNT)
+    private Set<Contacts> contactOwner;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="fk_userContact_id")
-    private Contacts userContact;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="fk_friendContact_id")
-    private Contacts friendContact;
+    @OneToMany(mappedBy=Contacts_.FRIEND_ACCOUNT)
+    private Set<Contacts> friendAcc;
 
     @Column(unique = true)
     private String email;
