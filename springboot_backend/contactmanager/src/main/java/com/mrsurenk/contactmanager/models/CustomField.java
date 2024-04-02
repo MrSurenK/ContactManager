@@ -1,5 +1,6 @@
 package com.mrsurenk.contactmanager.models;
 
+import com.mrsurenk.contactmanager.models.FieldDefinition_;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,8 @@ public class CustomField {
     private String value; //JSON string data
 
     private boolean deleted;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private FieldDefinition fieldDefinition;
 
 }
