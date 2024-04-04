@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+//ToDO: Add display picture to entity and corresponding DTO etc...
 @Data
 @NoArgsConstructor
 @Entity
