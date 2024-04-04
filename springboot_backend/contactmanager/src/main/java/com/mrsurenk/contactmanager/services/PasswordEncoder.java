@@ -1,18 +1,18 @@
 package com.mrsurenk.contactmanager.services;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-//ToDo: hash password and store into database.
+//service to encrypt and decrypt password
 @Service
 public class PasswordEncoder {
 
-    public BCryptPasswordEncoder encrypt(String password){
-
-        return new BCryptPasswordEncoder();
+    public String encrypt(String rawPassword){
+        return new BCryptPasswordEncoder().encode(rawPassword);
     }
 
-
+    public boolean passwordMatch(String rawPassword, String encodedPassword){
+        return new BCryptPasswordEncoder().matches(rawPassword, encodedPassword);
+    }
 }
