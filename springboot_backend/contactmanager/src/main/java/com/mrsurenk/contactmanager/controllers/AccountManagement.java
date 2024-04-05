@@ -22,3 +22,6 @@
 //
 //
 //}
+
+
+//ToDO: Save the entity into database in the controller after combining the image processing and the signup service!

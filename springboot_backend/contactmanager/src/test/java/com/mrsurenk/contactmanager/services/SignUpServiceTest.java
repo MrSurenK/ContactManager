@@ -53,7 +53,6 @@ public class SignUpServiceTest {
 
         signUpService.saveNewAccount(accountCreation);
 
-        verify(userAccountRepo).save(newUserAccount);
 
     }
 

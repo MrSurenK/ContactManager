@@ -26,7 +26,7 @@ public class SignUpService {
         //Check done so proceed with account creation
         UserAccount newUserAccount = mapper.mapDTOtoUser(accountCreation);
 
-        userAccountRepo.save(newUserAccount);
+
     }
 
 }
