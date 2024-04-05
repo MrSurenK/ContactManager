@@ -36,8 +36,7 @@ public class SignUpServiceTest {
                 "testemail@gmail.com",
                 "strongpassword",
                 "John",
-                "+6581234567",
-                "/displayPic"
+                "+6581234567"
         );
 
         UserAccount newUserAccount = UserAccount.builder()
@@ -67,7 +66,6 @@ public class SignUpServiceTest {
             .password("strongpassword")
             .userName("John")
             .contact("+6581234567")
-            .displayPic("/displayPic")
             .build()));
 
     // When & Then: Verify that attempting to save a new account with the same email throws an exception
@@ -76,8 +74,7 @@ public class SignUpServiceTest {
                     testEmail,
                     "strongpassword",
                     "John",
-                    "+6581234567",
-                    "/displayPic"
+                    "+6581234567"
             )));
     assertEquals("Email already in use.", thrownException.getMessage());
 

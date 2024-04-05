@@ -12,9 +12,8 @@ public record AccountCreation(
 
         String userName,
 
-        String contact,
+        String contact
 
-        String displayPic
 
 ) {
 

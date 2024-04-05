@@ -12,13 +12,12 @@ public class AccountCreationDTOMapper {
     private PasswordEncoder passwordEncoder;
 
     //Map user input fields to DTO
-    public AccountCreation mapFieldsToDTO(String email, String password, String userName, String contact,String displayPic){
+    public AccountCreation mapFieldsToDTO(String email, String password, String userName, String contact){
         return new AccountCreation(
                 email,
                 password,
                 userName,
-                contact,
-                displayPic
+                contact
         );
     }
 
@@ -38,7 +37,6 @@ public class AccountCreationDTOMapper {
                 .password(passwordEncoder.encrypt(dto.password()))
                 .userName(dto.userName())
                 .contact(dto.contact())
-                .displayPic(dto.displayPic())
                 .build();
     }
 
