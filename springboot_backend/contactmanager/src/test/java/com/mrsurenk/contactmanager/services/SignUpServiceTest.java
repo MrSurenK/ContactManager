@@ -12,8 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -55,6 +55,34 @@ public class SignUpServiceTest {
         signUpService.saveNewAccount(accountCreation);
 
         verify(userAccountRepo).save(newUserAccount);
+
+    }
+
+    @Test
+    public void testIfUserExists(){
+    // Given: Setup the existing user in the repository
+    String testEmail = "testemail@gmail.com";
+    when(userAccountRepo.findByEmail(eq(testEmail))).thenReturn(Optional.of(UserAccount.builder()
+            .email(testEmail)
+            .password("strongpassword")
+            .userName("John")
+            .contact("+6581234567")
+            .displayPic("/displayPic")
+            .build()));
+
+    // When & Then: Verify that attempting to save a new account with the same email throws an exception
+    IllegalStateException thrownException = assertThrows(IllegalStateException.class, () ->
+            signUpService.saveNewAccount(new AccountCreation(
+                    testEmail,
+                    "strongpassword",
+                    "John",
+                    "+6581234567",
+                    "/displayPic"
+            )));
+    assertEquals("Email already in use.", thrownException.getMessage());
+
+    // Verify the interaction with the repository
+    verify(userAccountRepo).findByEmail(testEmail);
 
     }
 
