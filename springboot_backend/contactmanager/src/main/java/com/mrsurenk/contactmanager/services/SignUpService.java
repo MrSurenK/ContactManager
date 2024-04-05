@@ -6,7 +6,7 @@ import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
 
 @Service
 public class SignUpService {
