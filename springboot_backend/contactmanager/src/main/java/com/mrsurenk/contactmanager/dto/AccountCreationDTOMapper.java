@@ -2,7 +2,6 @@ package com.mrsurenk.contactmanager.dto;
 
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.services.PasswordEncoder;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
