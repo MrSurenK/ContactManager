@@ -29,14 +29,16 @@ public class AccountCreationDTOMapperTest {
        String password="strongpassword";
        String userName="John";
        String contact="+6581234567";
+       String displayPic= "/displayPic.jpg";
 
-      AccountCreation dto = mapper.mapFieldsToDTO(email, password, userName, contact);
+      AccountCreation dto = mapper.mapFieldsToDTO(email, password, userName, contact, displayPic);
 
       assertNotNull(dto);
       assertEquals(email, dto.email());
       assertEquals(password, dto.password());
       assertEquals(userName, dto.userName());
       assertEquals(contact, dto.contact());
+      assertEquals(displayPic, dto.displayPic());
 
     }
 
@@ -48,8 +50,9 @@ public class AccountCreationDTOMapperTest {
         String encryptedPassword = "encryptedPassword";
         String userName="John";
         String contact="+6581234567";
+        String displayPic="./displayPic.jpg";
 
-        AccountCreation dto = mapper.mapFieldsToDTO(email, password, userName, contact);
+        AccountCreation dto = mapper.mapFieldsToDTO(email, password, userName, contact, displayPic);
 
         when(passwordEncoder.encrypt(password)).thenReturn(encryptedPassword);
 

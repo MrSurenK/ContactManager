@@ -1,6 +1,7 @@
 package com.mrsurenk.contactmanager.models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 
 //ToDO: Add display picture to entity and corresponding DTO etc...
 @Data
-@NoArgsConstructor
+@Builder
 @Entity
 public class UserAccount {
     @Id
@@ -34,6 +35,8 @@ public class UserAccount {
     private String contact;
 
     private LocalDate lastLogin;
+
+    private String displayPic;
 
     private boolean hidden;
 

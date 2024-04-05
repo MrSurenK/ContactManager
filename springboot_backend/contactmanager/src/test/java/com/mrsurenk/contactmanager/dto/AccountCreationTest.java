@@ -16,7 +16,8 @@ public class AccountCreationTest {
                 "test@example.com",
                 "strongpassword",
                 "john",
-                "+6581234565"
+                "+6581234565",
+                "/displayPic.jpg"
         ));
     }
 
@@ -27,7 +28,8 @@ public class AccountCreationTest {
                 "invalidemail",
                 "strongpassword",
                 "John",
-                "+6581234565"
+                "+6581234565",
+                "/displayPic.jpg"
         ));
     }
 
@@ -37,7 +39,8 @@ public class AccountCreationTest {
                 "test@example.com",
                 "invalid",
                 "John",
-                "+6581234565"
+                "+6581234565",
+                "/displayPic.jpg"
         ));
     }
 
@@ -47,7 +50,8 @@ public class AccountCreationTest {
                 "test@example.com",
                 "invalid",
                 "",
-                "+6581234565"
+                "+6581234565",
+                "/displayPic.jpg"
         ));
     }
 
@@ -57,7 +61,8 @@ public class AccountCreationTest {
                  "test@example.com",
                 "invalid",
                 "",
-                "+12234565"
+                "+12234565",
+                "/displayPic.jpg"
         ));
     }
 }
