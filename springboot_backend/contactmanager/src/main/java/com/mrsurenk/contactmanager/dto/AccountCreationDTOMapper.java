@@ -11,7 +11,7 @@ public class AccountCreationDTOMapper {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //Map user input fields to DTO
+//  Map user input fields to DTO (Redundant, only useful in testing)
     public AccountCreation mapFieldsToDTO(String email, String password, String userName, String contact){
         return new AccountCreation(
                 email,

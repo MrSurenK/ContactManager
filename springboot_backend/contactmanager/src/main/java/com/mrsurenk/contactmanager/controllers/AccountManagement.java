@@ -1,27 +1,54 @@
-//package com.mrsurenk.contactmanager.controllers;
-//
-//
-//import com.mrsurenk.contactmanager.models.UserAccount;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//@RestController
-//public class AccountManagement {
-//
-//
-//
-//
-//    @PostMapping("/signup")
-//    public UserAccount createNewUser(){
-//
-//
-//
-//    };
-//
-//
-//
-//
-//}
+package com.mrsurenk.contactmanager.controllers;
+
+import com.mrsurenk.contactmanager.dto.AccountCreation;
+import com.mrsurenk.contactmanager.dto.AccountCreationDTOMapper;
+import com.mrsurenk.contactmanager.models.UserAccount;
+import com.mrsurenk.contactmanager.repos.UserAccountRepo;
+import com.mrsurenk.contactmanager.services.ImageUploadService;
+import com.mrsurenk.contactmanager.services.SignUpService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
+@RestController
+public class AccountManagement {
+
+    @Autowired
+    ImageUploadService imageUploadService;
+
+    @Autowired
+    SignUpService signUpService;
+
+    @Autowired
+    UserAccountRepo userAccountRepo;
+
+    @Autowired
+    AccountCreationDTOMapper mapper;
 
 
-//ToDO: Save the entity into database in the controller after combining the image processing and the signup service!
+    //AccountCreation is the DTO
+    @PostMapping("/signup")
+    public ResponseEntity<String> createNewUser(@RequestBody AccountCreation formFields, @RequestParam MultipartFile imageFile) throws IOException {
+
+        try {
+            signUpService.checkIfAccountExists(formFields);
+            String imageDir = imageUploadService.uploadImage(imageFile);
+            UserAccount newUser = mapper.mapDTOtoUser(formFields);
+            newUser.setDisplayPic(imageDir);
+            userAccountRepo.save(newUser);
+            return ResponseEntity.ok("User account successfully created!");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while creating the user.");
+        }
+    };
+}
+
