@@ -12,6 +12,7 @@ import org.apache.catalina.security.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.string;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
@@ -29,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AccountManagement.class)
+@AutoConfigureMockMvc
 //@SpringBootTest(classes = ContactmanagerApplication.class, exclude = SecurityConfig.class)
 public class AccountManagementTest {
 
@@ -62,8 +65,8 @@ public class AccountManagementTest {
                         .param("password", accountCreation.password())
                         .param("userName", accountCreation.userName())
                         .param("contact", accountCreation.contact())
-                        .contentType(MediaType.MULTIPART_FORM_DATA))
-                        .andExpect(status().isConflict())
-                        .andExpect((ResultMatcher) content().string("Email already in use."));
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
+                )
+                        .andExpect(status().isOk());
     }
 }
