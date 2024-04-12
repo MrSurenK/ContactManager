@@ -7,7 +7,6 @@ import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import com.mrsurenk.contactmanager.services.ImageUploadService;
 import com.mrsurenk.contactmanager.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,9 +31,13 @@ public class AccountManagement {
 
     //AccountCreation is the DTO
     @PostMapping("/signup")
-    public ResponseEntity<String> createNewUser(@ModelAttribute AccountCreation formFields, @RequestParam MultipartFile imageFile) throws IOException {
+    public ResponseEntity<String> createNewUser(@ModelAttribute AccountCreation formFields, @RequestParam(name="imgFile", required = false) MultipartFile imageFile) throws IOException {
             signUpService.checkIfAccountExists(formFields);
+
+
             String imageDir = imageUploadService.uploadImage(imageFile);
+
+
             UserAccount newUser = mapper.mapDTOtoUser(formFields);
             newUser.setDisplayPic(imageDir);
             userAccountRepo.save(newUser);
@@ -42,4 +45,5 @@ public class AccountManagement {
     }
 }
 
+//ToDo: Account login authentication and authorisation
 
