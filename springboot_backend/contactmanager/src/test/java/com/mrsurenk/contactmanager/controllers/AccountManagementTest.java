@@ -67,7 +67,7 @@ public class AccountManagementTest {
                         .andExpect(status().isOk());
     }
 
-       @Test
+    @Test
     void shouldHandleDuplicateEmailException() throws Exception {
         MockMultipartFile file = new MockMultipartFile("imageFile", "filename.txt", "text/plain", "some xml".getBytes());
 
