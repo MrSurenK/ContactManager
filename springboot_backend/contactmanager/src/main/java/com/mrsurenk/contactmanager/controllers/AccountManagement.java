@@ -33,19 +33,13 @@ public class AccountManagement {
     //AccountCreation is the DTO
     @PostMapping("/signup")
     public ResponseEntity<String> createNewUser(@ModelAttribute AccountCreation formFields, @RequestParam MultipartFile imageFile) throws IOException {
-
-        try {
             signUpService.checkIfAccountExists(formFields);
             String imageDir = imageUploadService.uploadImage(imageFile);
             UserAccount newUser = mapper.mapDTOtoUser(formFields);
             newUser.setDisplayPic(imageDir);
             userAccountRepo.save(newUser);
             return ResponseEntity.ok("User account successfully created!");
-        } catch (IllegalStateException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        } catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while creating the user.");
-        }
-    };
+    }
 }
+
 

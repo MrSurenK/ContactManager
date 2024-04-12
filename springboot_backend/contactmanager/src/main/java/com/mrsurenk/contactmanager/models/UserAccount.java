@@ -1,9 +1,11 @@
 package com.mrsurenk.contactmanager.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -11,11 +13,14 @@ import java.util.UUID;
 
 //ToDO: Add display picture to entity and corresponding DTO etc...
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class UserAccount {
     @Id
     @GeneratedValue
+    @UuidGenerator
     private UUID id;
 
     @OneToMany(mappedBy= Contacts_.USER_ACCOUNT)

@@ -1,33 +1,30 @@
 package com.mrsurenk.contactmanager.controllers;
 
-
-import com.mrsurenk.contactmanager.ContactmanagerApplication;
 import com.mrsurenk.contactmanager.dto.AccountCreation;
 import com.mrsurenk.contactmanager.dto.AccountCreationDTOMapper;
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import com.mrsurenk.contactmanager.services.ImageUploadService;
 import com.mrsurenk.contactmanager.services.SignUpService;
-import org.apache.catalina.security.SecurityConfig;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 
-import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.string;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AccountManagement.class)
@@ -68,5 +65,23 @@ public class AccountManagementTest {
                         .contentType(MediaType.MULTIPART_FORM_DATA)
                 )
                         .andExpect(status().isOk());
+    }
+
+       @Test
+    void shouldHandleDuplicateEmailException() throws Exception {
+        MockMultipartFile file = new MockMultipartFile("imageFile", "filename.txt", "text/plain", "some xml".getBytes());
+
+        // Mock the behavior to throw an IllegalStateException when checkIfAccountExists is called
+        doThrow(new IllegalStateException("Email already in use.")).when(signUpService).checkIfAccountExists(any(AccountCreation.class));
+
+        mockMvc.perform(multipart("/signup")
+                .file(file)
+                .param("email", "test@example.com")
+                .param("password", "password")
+                .param("userName", "username")
+                .param("contact", "1234567890")
+                .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andExpect(status().isConflict())
+                .andExpect(content().string("Email already in use."));
     }
 }
