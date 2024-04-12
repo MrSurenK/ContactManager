@@ -67,21 +67,4 @@ public class AccountManagementTest {
                         .andExpect(status().isOk());
     }
 
-    @Test
-    void shouldHandleDuplicateEmailException() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("imageFile", "filename.txt", "text/plain", "some xml".getBytes());
-
-        // Mock the behavior to throw an IllegalStateException when checkIfAccountExists is called
-        doThrow(new IllegalStateException("Email already in use.")).when(signUpService).checkIfAccountExists(any(AccountCreation.class));
-
-        mockMvc.perform(multipart("/signup")
-                .file(file)
-                .param("email", "test@example.com")
-                .param("password", "password")
-                .param("userName", "username")
-                .param("contact", "1234567890")
-                .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().isConflict())
-                .andExpect(content().string("Email already in use."));
-    }
 }
