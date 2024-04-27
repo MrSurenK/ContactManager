@@ -59,7 +59,7 @@ public class AccountCreationDTOMapperTest {
         assertNotNull(userAccount);
         assertEquals(email, userAccount.getEmail());
         assertEquals(encryptedPassword, userAccount.getPassword());
-        assertEquals(userName, userAccount.getUserName());
+        assertEquals(userName, userAccount.getName());
         assertEquals(contact, userAccount.getContact());
 
         verify(passwordEncoder).encrypt(password);

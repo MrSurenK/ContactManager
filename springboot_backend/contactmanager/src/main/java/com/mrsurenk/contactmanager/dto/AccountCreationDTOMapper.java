@@ -35,7 +35,7 @@ public class AccountCreationDTOMapper {
                 .builder()
                 .email(dto.email())
                 .password(passwordEncoder.encrypt(dto.password()))
-                .userName(dto.userName())
+                .name(dto.userName())
                 .contact(dto.contact())
                 .build();
     }

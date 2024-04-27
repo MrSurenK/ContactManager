@@ -6,18 +6,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-//ToDO: Add display picture to entity and corresponding DTO etc...
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class UserAccount {
+public class UserAccount implements UserDetails {
     @Id
     @GeneratedValue
     @UuidGenerator
@@ -32,7 +35,7 @@ public class UserAccount {
     @Column(unique = true)
     private String email;
 
-    private String userName;
+    private String name;
 
     @Column(length = 72)
     private String password;
@@ -45,4 +48,32 @@ public class UserAccount {
 
     private boolean hidden;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
