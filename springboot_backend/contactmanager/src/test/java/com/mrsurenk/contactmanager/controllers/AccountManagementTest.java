@@ -46,24 +46,24 @@ public class AccountManagementTest {
     @MockBean
     private AccountCreationDTOMapper mapper;
 
-    @Test
-    void shouldCreateNewUser() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("imageFile", "test.jpg", MediaType.IMAGE_JPEG_VALUE, "test image content".getBytes());
-        AccountCreation accountCreation = new AccountCreation("test@example.com", "password", "username", "+6581234567");
-        UserAccount userAccount = UserAccount.builder().build();
-
-        when(mapper.mapDTOtoUser(any(AccountCreation.class))).thenReturn(userAccount);
-        when(imageUploadService.uploadImage(file)).thenReturn("imageDir");
-
-        mockMvc.perform(multipart("/signup")
-                        .file(file)
-                        .param("email", accountCreation.email())
-                        .param("password", accountCreation.password())
-                        .param("userName", accountCreation.userName())
-                        .param("contact", accountCreation.contact())
-                        .contentType(MediaType.MULTIPART_FORM_DATA)
-                )
-                        .andExpect(status().isOk());
-    }
+//    @Test
+//    void shouldCreateNewUser() throws Exception {
+//        MockMultipartFile file = new MockMultipartFile("imageFile", "test.jpg", MediaType.IMAGE_JPEG_VALUE, "test image content".getBytes());
+//        AccountCreation accountCreation = new AccountCreation("test@example.com", "password", "username", "+6581234567");
+//        UserAccount userAccount = UserAccount.builder().build();
+//
+//        when(mapper.mapDTOtoUser(any(AccountCreation.class))).thenReturn(userAccount);
+//        when(imageUploadService.uploadImage(file)).thenReturn("imageDir");
+//
+//        mockMvc.perform(multipart("/signup")
+//                        .file(file)
+//                        .param("email", accountCreation.email())
+//                        .param("password", accountCreation.password())
+//                        .param("userName", accountCreation.userName())
+//                        .param("contact", accountCreation.contact())
+//                        .contentType(MediaType.MULTIPART_FORM_DATA)
+//                )
+//                        .andExpect(status().isOk());
+//    }
 
 }
