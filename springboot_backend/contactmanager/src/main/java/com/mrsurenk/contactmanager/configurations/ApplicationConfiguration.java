@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-//Overrides default authentication method in Spring
+//Overrides default security configuration in Springboot
 @Configuration
 public class ApplicationConfiguration {
 
