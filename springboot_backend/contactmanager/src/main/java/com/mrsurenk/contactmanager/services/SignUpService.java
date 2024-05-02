@@ -22,7 +22,6 @@ public class SignUpService {
 //            log.info("Attempt to create a user with an existing email: {}", accountCreation.email());
             throw new IllegalStateException("Email already in use.");
         }
-
     }
 }
 
