@@ -57,13 +57,11 @@ public class AuthenticationController {
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
         LoginResponse loginResponse = LoginResponse.builder()
-                .token(jwtToken)
+                .accessToken(jwtToken)
                 .expiresIn(jwtService.getExpirationTime())
                 .build();
 
         return ResponseEntity.ok(loginResponse);
-
-
     }
 }
 
