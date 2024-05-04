@@ -46,7 +46,7 @@ public class UserAccount implements UserDetails {
 
     private String displayPic;
 
-    private boolean hidden;
+    //cascade delete account if user deletes account
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

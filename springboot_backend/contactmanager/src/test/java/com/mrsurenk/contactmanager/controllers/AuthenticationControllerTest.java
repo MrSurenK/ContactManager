@@ -1,44 +1,33 @@
 package com.mrsurenk.contactmanager.controllers;
 
-import com.mrsurenk.contactmanager.dto.AccountCreation;
 import com.mrsurenk.contactmanager.dto.AccountCreationDTOMapper;
-import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import com.mrsurenk.contactmanager.services.ImageUploadService;
-import com.mrsurenk.contactmanager.services.SignUpService;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(AccountManagement.class)
+@WebMvcTest(AuthenticationController.class)
 @AutoConfigureMockMvc
 //@SpringBootTest(classes = ContactmanagerApplication.class, exclude = SecurityConfig.class)
-public class AccountManagementTest {
+public class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private ImageUploadService imageUploadService;
-
-    @MockBean
-    private SignUpService signUpService;
 
     @MockBean
     private UserAccountRepo userAccountRepo;
