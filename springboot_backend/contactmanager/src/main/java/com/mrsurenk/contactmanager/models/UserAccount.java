@@ -1,5 +1,7 @@
 package com.mrsurenk.contactmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,9 +28,11 @@ public class UserAccount implements UserDetails {
     @UuidGenerator
     private UUID id;
 
+    @JsonIgnore
     @OneToMany(mappedBy= Contacts_.USER_ACCOUNT)
     private Set<Contacts> contactOwner;
 
+    @JsonIgnore
     @OneToMany(mappedBy=Contacts_.FRIEND_ACCOUNT)
     private Set<Contacts> friendAcc;
 

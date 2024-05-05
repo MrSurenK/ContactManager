@@ -2,10 +2,6 @@ package com.mrsurenk.contactmanager.controllers;
 
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.services.UserService;
-import jakarta.transaction.Transactional;
-import lombok.CustomLog;
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/users")
 @RestController
 public class UserController {
@@ -30,6 +27,7 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         UserAccount currentUser = (UserAccount) authentication.getPrincipal();
+
 
         return ResponseEntity.ok(currentUser);
     }

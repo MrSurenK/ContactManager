@@ -1,5 +1,6 @@
 package com.mrsurenk.contactmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mrsurenk.contactmanager.models.CustomField_;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,10 +19,14 @@ public class Contacts {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    private UserAccount userAccount;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="userAccount_id", foreignKey = @ForeignKey(name="userAccount_id"))
+    private UserAccount userAccount;
+
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="friendAccount_id", foreignKey = @ForeignKey(name="friendAccount_id"))
     private UserAccount friendAccount;
 
     @Column(length=LONG)
