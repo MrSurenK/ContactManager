@@ -3,6 +3,12 @@ import RegistrationForm from '../components/RegistrationForm.vue'
 </script>
 
 <template>
-  <h1>Registration Page</h1>
-  <RegistrationForm />
+  <div class="register-page">
+    <div id="register-card">
+      <h1>Registration Page</h1>
+      <RegistrationForm />
+    </div>
+  </div>
 </template>
+
+<style></style>

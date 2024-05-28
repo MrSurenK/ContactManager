@@ -9,8 +9,8 @@ const handleSubmit = () => {
 }
 </script>
 <template>
-  <div id="form-container">
-    <div id="signup-link">
+  <div class="form-container">
+    <div class="nav-link>
       <p>Not a member yet?</p>
       <nav>
         <RouterLink to="/register">Sign Up Here</RouterLink>
@@ -25,15 +25,15 @@ const handleSubmit = () => {
         <label>Password</label>
         <input type="password" v-model="password" />
       </div>
-      <div id="submit-btn">
+      <div class="submit-btn">
         <button type="submit">Sign In</button>
       </div>
     </form>
   </div>
 </template>
 
-<style scoped>
-#signup-link {
+<style>
+.nav-link {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
@@ -46,7 +46,7 @@ const handleSubmit = () => {
   gap: 0.5em;
 }
 
-#submit-btn {
+.submit-btn {
   display: flex;
   justify-content: center;
 }
@@ -57,7 +57,7 @@ form {
   gap: 2em;
 }
 
-#form-container {
+.form-container {
   display: flex;
   flex-direction: column;
   gap: 2em;
