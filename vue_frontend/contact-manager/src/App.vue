@@ -10,3 +10,10 @@ import Login from './views/Login.vue'
 </template>
 
 <style scoped></style>
+
+<!-- ToDOs: 
+  1. Create a homepage component 
+  2. Set up Registration page
+  2. Link Sign In API to frontend
+  3. Test
+ -->
