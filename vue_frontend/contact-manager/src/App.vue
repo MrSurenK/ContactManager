@@ -11,8 +11,6 @@ import { RouterView } from 'vue-router'
 <style scoped></style>
 
 <!-- ToDOs: 
-  1. Create a homepage component 
-  2. Set up Registration page
-  2. Link Sign In API to frontend
+  2. Link Sign In and register API to frontend
   3. Test
  -->

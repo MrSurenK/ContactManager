@@ -23,7 +23,7 @@ public class UserController {
     UserService userService;
 
 
-    @GetMapping("/user")
+    @GetMapping("/loggedIn")
     public ResponseEntity<UserAccount> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -33,6 +33,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
+    // Useful if admin features were to be developed.
     @GetMapping("/allUsers")
     public ResponseEntity<List<UserAccount>> allUsers(){
         List<UserAccount> users = userService.allUsers();
