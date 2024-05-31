@@ -6,6 +6,23 @@ const name = ref('')
 const email = ref('')
 const password = ref('')
 const contact = ref('')
+
+//Registration API call
+const registerAccount = async () => {
+  try {
+    const response = await fetch(import.meta.env.VITE_API_URL+ "/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type":"multipart/form-data"
+      }
+      body: JSON.stringify(
+        //ToDO: Define body and also figure out how to pass image to API
+      )
+    }
+
+    )
+  }
+}
 </script>
 
 <template>
