@@ -10,7 +10,7 @@ const handleSubmit = () => {
 </script>
 <template>
   <div class="form-container">
-    <div class="nav-link>
+    <div class="nav-link">
       <p>Not a member yet?</p>
       <nav>
         <RouterLink to="/register">Sign Up Here</RouterLink>
