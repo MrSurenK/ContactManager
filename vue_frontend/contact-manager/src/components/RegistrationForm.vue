@@ -29,7 +29,7 @@ const handleSubmit = async () => {
   formData.append('userName', name.value)
   formData.append('contact', contact.value)
   if (imageFile.value != null) {
-    formData.append('imageFile', imageFile.value)
+    formData.append('imgFile', imageFile.value)
   }
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`)
