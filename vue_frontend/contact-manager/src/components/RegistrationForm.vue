@@ -11,11 +11,6 @@ const fileInput = ref<HTMLInputElement | null>(null)
 const imageFile = ref<File | null>(null)
 
 //Formdata object to pass to API
-let formData = new FormData()
-formData.append('email', email.value)
-formData.append('password', password.value) // Remember to hash the password before sending over to API
-formData.append('userName', name.value)
-formData.append('contact', contact.value)
 
 //Handle file upload
 const handleFileUpload = () => {
@@ -28,8 +23,16 @@ const handleFileUpload = () => {
 
 //Registration API call
 const handleSubmit = async () => {
+  let formData = new FormData()
+  formData.append('email', email.value)
+  formData.append('password', password.value)
+  formData.append('userName', name.value)
+  formData.append('contact', contact.value)
   if (imageFile.value != null) {
     formData.append('imageFile', imageFile.value)
+  }
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`)
   }
   try {
     const response = await fetch(import.meta.env.VITE_API_URL + '/auth/signup', {
@@ -37,6 +40,7 @@ const handleSubmit = async () => {
       body: formData
       //ToDO: Define body and also figure out how to pass image to API
     })
+
     if (response.ok) {
       const account = await response.json()
       console.log(account)
