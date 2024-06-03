@@ -7,25 +7,49 @@ const email = ref('')
 const password = ref('')
 const contact = ref('')
 
-//Registration API call
-const registerAccount = async () => {
-  try {
-    const response = await fetch(import.meta.env.VITE_API_URL+ "/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type":"multipart/form-data"
-      }
-      body: JSON.stringify(
-        //ToDO: Define body and also figure out how to pass image to API
-      )
-    }
+const fileInput = ref<HTMLInputElement | null>(null)
+const imageFile = ref<File | null>(null)
 
-    )
+//Formdata object to pass to API
+let formData = new FormData()
+formData.append('email', email.value)
+formData.append('password', password.value) // Remember to hash the password before sending over to API
+formData.append('userName', name.value)
+formData.append('contact', contact.value)
+
+//Handle file upload
+const handleFileUpload = () => {
+  const files = fileInput.value?.files
+  if (files && files.length > 0) {
+    imageFile.value = files[0]
+    console.log(imageFile.value)
+  }
+}
+
+//Registration API call
+const handleSubmit = async () => {
+  if (imageFile.value != null) {
+    formData.append('imageFile', imageFile.value)
+  }
+  try {
+    const response = await fetch(import.meta.env.VITE_API_URL + '/auth/signup', {
+      method: 'POST',
+      body: formData
+      //ToDO: Define body and also figure out how to pass image to API
+    })
+    if (response.ok) {
+      const account = await response.json()
+      console.log(account)
+    } else {
+      console.log(await response.json())
+    }
+  } catch (err: any) {
+    console.error(`error: ${err.message}`)
   }
 }
 </script>
 
-<template>
+<template v-slot="file">
   <div class="form-container">
     <div class="nav-link">
       <p>Already have an account?</p>
@@ -48,10 +72,14 @@ const registerAccount = async () => {
       </div>
       <div class="form-elements">
         <label>Contact No</label>
-        <input v-model="contact" type="tel" placeholder="+65 88612345" />
+        <input v-model="contact" placeholder="+65 88612345" />
+      </div>
+      <div class="form-elements">
+        <label>Display Picture</label>
+        <input type="file" ref="fileInput" @change="handleFileUpload" accept=".png, .jpg, .jpeg" />
       </div>
       <div class="submit-btn">
-        <button type="submit">Register</button>
+        <button @click="handleSubmit" type="submit">Register</button>
       </div>
     </form>
   </div>
