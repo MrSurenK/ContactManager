@@ -40,12 +40,11 @@ const handleSubmit = async () => {
       body: formData
       //ToDO: Define body and also figure out how to pass image to API
     })
-
     if (response.ok) {
       const account = await response.json()
-      console.log(account)
+      return account
     } else {
-      console.log(await response.json())
+      console.error(await response.json())
     }
   } catch (err: any) {
     console.error(`error: ${err.message}`)
@@ -76,7 +75,7 @@ const handleSubmit = async () => {
       </div>
       <div class="form-elements">
         <label>Contact No</label>
-        <input v-model="contact" placeholder="+65 88612345" />
+        <input v-model="contact" placeholder="+6588612345" />
       </div>
       <div class="form-elements">
         <label>Display Picture</label>
