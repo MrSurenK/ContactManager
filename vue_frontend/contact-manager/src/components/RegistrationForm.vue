@@ -77,9 +77,15 @@ const handleSubmit = async () => {
         <label>Contact No</label>
         <input v-model="contact" placeholder="+6588612345" />
       </div>
-      <div class="form-elements">
+      <div class="form-elements" v-bind:style="{ width: 'inherit' }">
         <label>Display Picture</label>
-        <input type="file" ref="fileInput" @change="handleFileUpload" accept=".png, .jpg, .jpeg" />
+        <input
+          id="upload-btn"
+          type="file"
+          ref="fileInput"
+          @change="handleFileUpload"
+          accept=".png, .jpg, .jpeg"
+        />
       </div>
       <div class="submit-btn">
         <button @click="handleSubmit" type="submit">Register</button>
@@ -88,4 +94,8 @@ const handleSubmit = async () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#upload-btn {
+  width: 190px;
+}
+</style>
