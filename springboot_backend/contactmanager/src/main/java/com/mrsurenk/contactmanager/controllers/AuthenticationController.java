@@ -49,6 +49,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(newUser);
     }
 
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginDTO loginDTO){
 
