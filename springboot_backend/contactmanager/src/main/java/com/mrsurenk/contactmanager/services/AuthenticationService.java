@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.nio.channels.ScatteringByteChannel;
+
 @Service
 public class AuthenticationService {
     @Autowired
@@ -21,25 +23,30 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public UserAccount signup(AccountCreation dto){
-       return  UserAccount.builder()
+    public UserAccount signup(AccountCreation dto) {
+        return UserAccount.builder()
                 .email(dto.email())
                 .password(passwordEncoder.encode(dto.password()))
                 .name(dto.userName())
                 .contact(dto.contact())
                 .build();
 
-       //save user in the controller after handling image upload
+        //save user in the controller after handling image upload
 
     }
 
-    public UserAccount authenticate(LoginDTO input){
+    public UserAccount authenticate(LoginDTO input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         input.email(),
                         input.password()
                 )
         );
-        return userAccountRepo.findByEmail(input.email()).orElseThrow();
+        return userAccountRepo.findByEmail(input.email()).orElseThrow(
+                () -> new IllegalArgumentException("User not found!")
+        );
+
     }
 }
+
+
