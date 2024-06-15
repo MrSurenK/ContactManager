@@ -42,9 +42,7 @@ public class AuthenticationService {
                         input.password()
                 )
         );
-        return userAccountRepo.findByEmail(input.email()).orElseThrow(
-                () -> new IllegalArgumentException("User not found!")
-        );
+        return userAccountRepo.findByEmail(input.email()).orElseThrow();
 
     }
 }
