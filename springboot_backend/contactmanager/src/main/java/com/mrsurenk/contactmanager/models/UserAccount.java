@@ -1,7 +1,6 @@
 package com.mrsurenk.contactmanager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,6 +55,8 @@ public class UserAccount implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }
+
+
     @Override
     public String getUsername() {
         return email;
@@ -80,4 +81,5 @@ public class UserAccount implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

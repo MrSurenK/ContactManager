@@ -8,7 +8,6 @@ import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import com.mrsurenk.contactmanager.services.AuthenticationService;
 import com.mrsurenk.contactmanager.services.ImageUploadService;
 import com.mrsurenk.contactmanager.services.JwtService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
