@@ -25,6 +25,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
+  // This is wrong! fix. Route can be manually accessed by URL
   if (!localStorage.getItem('accessToken') && to.name !== 'dashboard') {
     next(false)
   } else {
