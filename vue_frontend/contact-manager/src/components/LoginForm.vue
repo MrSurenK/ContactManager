@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { ref } from 'vue'
 const username = ref('')
 const password = ref('')
+const router = useRouter()
 
 //Call login API and if successful log in else return error
 const handleSubmit = async () => {
@@ -20,12 +21,14 @@ const handleSubmit = async () => {
     })
     if (response.ok) {
       const data = await response.json()
+      localStorage.setItem('accessToken', data.accessToken)
+      router.push({ name: 'dashboard' })
       return console.log(data)
     } else {
       console.error(await response.json())
     }
   } catch (error: any) {
-    console.error(`Error: ${error.msg}`)
+    console.error(`Error: ${error.message}`)
   }
 }
 </script>

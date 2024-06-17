@@ -24,6 +24,14 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach(async (to, from, next) => {
+  if (!localStorage.getItem('accessToken') && to.name !== 'dashboard') {
+    next(false)
+  } else {
+    next()
+  }
+})
+
 export default router
 
 // toDo: Set up homepage route and component
