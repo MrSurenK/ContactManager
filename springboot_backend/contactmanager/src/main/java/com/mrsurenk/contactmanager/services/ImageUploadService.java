@@ -27,3 +27,5 @@ public class ImageUploadService {
         }
     }
 }
+
+// Image uploads do not work! 

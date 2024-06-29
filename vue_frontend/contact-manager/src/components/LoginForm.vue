@@ -23,7 +23,8 @@ const handleSubmit = async () => {
     if (response.ok) {
       const data = await response.json()
       localStorage.setItem('accessToken', data.accessToken)
-      router.push({ name: 'dashboard' })
+      localStorage.setItem('username', data.userName)
+      router.push({ name: 'dashboard', params: { id: data.userName } })
       return console.log(data)
     } else {
       console.error(await response.json())
