@@ -9,29 +9,37 @@ const router = createRouter({
     {
       path: '/',
       name: 'login',
-      component: LoginView
+      component: LoginView,
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterView
+      component: RegisterView,
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashboardView
+      component: DashboardView,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to, from, next) => {
   const isAuthenticated = localStorage.getItem('accessToken')
-  if (!isAuthenticated && to.name !== 'login') {
-    return { name: 'login' }
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: 'login' })
+  } else {
+    next()
   }
 })
 
 export default router
-
-// toDo: Set up homepage route and component
-// Return to sign in Route

@@ -66,7 +66,7 @@ public class AuthenticationController {
     }
 }
 
-/*ToDO:
+/*StretchGoals:
    1. Refresh Token feature
    2. Logout Feature
  */
