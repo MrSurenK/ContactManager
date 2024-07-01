@@ -2,12 +2,17 @@
 import { RouterLink, useRouter } from 'vue-router'
 import { ref } from 'vue'
 
-const username = ref('')
-const password = ref('')
+const username = ref<string>('')
+const password = ref<string>('')
 const router = useRouter()
 
+interface LoginResponse {
+  accessToken: string
+  userName: string
+}
+
 //Call login API and if successful log in else return error
-const handleSubmit = async () => {
+const handleSubmit = async (): Promise<void> => {
   try {
     // console.log('Form submitted with: ', { username: username.value, password: password.value })
     const response = await fetch(import.meta.env.VITE_API_URL + '/auth/login', {
@@ -21,7 +26,7 @@ const handleSubmit = async () => {
       })
     })
     if (response.ok) {
-      const data = await response.json()
+      const data: LoginResponse = await response.json()
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('username', data.userName)
       router.push({ name: 'dashboard', params: { id: data.userName } })
@@ -45,7 +50,7 @@ const handleSubmit = async () => {
     <form @submit.prevent="handleSubmit">
       <div class="form-elements">
         <label>Username</label>
-        <input v-model="username" />
+        <input type="text" v-model="username" />
       </div>
       <div class="form-elements">
         <label>Password</label>
