@@ -34,4 +34,36 @@ describe('Login Form Component', () => {
     const submitButton = wrapper.find('button[type="submit"]')
     expect(submitButton.exists()).toBe(true)
   })
+
+  test('redirect authenticated user to dashboard', async () => {
+    //mock router
+    const mockRoute = {
+      params: {
+        id: 'test_user'
+      }
+    }
+    const mockRouter = {
+      push: vi.fn()
+    }
+
+    const wrapper = mount(LoginForm, {
+      props: {
+        isAuthenticated: true
+      },
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter
+        }
+      }
+    })
+
+    await wrapper.find('input[type="text"]').setValue('testuser')
+    await wrapper.find('input[type="password"]').setValue('password')
+
+    await wrapper.find('button[type="submit"]').trigger('click')
+
+    expect(mockRouter.push).toHaveBeenCalledTimes(1)
+    expect(mockRouter.push).toHaveBeenCalledWith('/dashboard/test_user')
+  })
 })
