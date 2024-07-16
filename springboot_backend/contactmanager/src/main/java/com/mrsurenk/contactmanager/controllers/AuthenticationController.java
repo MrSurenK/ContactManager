@@ -32,6 +32,7 @@ public class AuthenticationController {
     JwtService jwtService;
 
     //AccountCreation is the DTO
+    @CrossOrigin
     @PostMapping("/signup")
     public ResponseEntity<UserAccount> createNewUser(@ModelAttribute AccountCreation formFields, @RequestParam(name="imgFile", required = false) MultipartFile imageFile) throws IOException {
             if (userAccountRepo.findByEmail(formFields.email()).isPresent()){
