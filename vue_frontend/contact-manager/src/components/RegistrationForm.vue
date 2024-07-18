@@ -29,16 +29,15 @@ const handleSubmit = async () => {
   formData.append('userName', name.value)
   formData.append('contact', contact.value)
   if (imageFile.value != null) {
-    formData.append('imgFile', imageFile.value)
+    formData.append('imgFile', imageFile.value) //image uploads dont work on backend
   }
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`)
-  }
+  // for (let [key, value] of formData.entries()) {
+  //   console.log(`${key}: ${value}`)
+  // }
   try {
     const response = await fetch(import.meta.env.VITE_API_URL + '/auth/signup', {
       method: 'POST',
       body: formData
-      //ToDO: Define body and also figure out how to pass image to API
     })
     if (response.ok) {
       const account = await response.json()
