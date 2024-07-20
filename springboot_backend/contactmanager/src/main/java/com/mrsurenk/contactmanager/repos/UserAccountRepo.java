@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public interface UserAccountRepo extends CrudRepository<UserAccount, UUID> {
     Optional<UserAccount> findByEmail(String email);
+
     List<UserAccount> findByNameContainingIgnoreCase(String name);
-
-
 }
