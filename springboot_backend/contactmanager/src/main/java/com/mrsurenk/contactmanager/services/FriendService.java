@@ -1,5 +1,6 @@
 package com.mrsurenk.contactmanager.services;
 
+import com.mrsurenk.contactmanager.dto.UserAccountDTO;
 import com.mrsurenk.contactmanager.exceptions.NoContactsFoundException;
 import com.mrsurenk.contactmanager.exceptions.UserNotFoundException;
 import com.mrsurenk.contactmanager.models.UserAccount;
@@ -28,8 +29,14 @@ public class FriendService {
     }
 
     //Method to access contact information
-    public UserAccount getAccountInfo(UUID id) {
-        return userAccountRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    public UserAccountDTO getAccountInfo(UUID id) {
+        UserAccount account = userAccountRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        return new UserAccountDTO(
+                account.getEmail(),
+                account.getName(),
+                account.getContact(),
+                account.getDisplayPic()
+        );
     }
 
 

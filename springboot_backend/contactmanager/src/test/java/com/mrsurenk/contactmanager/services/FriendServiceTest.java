@@ -74,6 +74,13 @@ public class FriendServiceTest {
     @Test
     @DisplayName("Test if account information can be retrieved")
     public void testAccountInfo() {
+        //arrange
+        when(userAccountRepo.findById(id)).thenReturn(123);
+
+        //act
         
+
+        //assert
+
     }
 }
