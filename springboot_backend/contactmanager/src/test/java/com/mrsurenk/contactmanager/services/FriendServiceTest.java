@@ -64,9 +64,9 @@ public class FriendServiceTest {
         when(userAccountRepo.findByNameContainingIgnoreCase((anyString()))).thenReturn(new ArrayList<>());
 
         //act and assert
-        assertThrows(NoContactsFoundException.class, () -> {
+        assertThrows(NoContactsFoundException.class, () ->
             friendService.searchContacts("Sarah");
-        });
+        );
 
     }
 

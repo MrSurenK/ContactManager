@@ -4,9 +4,11 @@ import com.mrsurenk.contactmanager.exceptions.NoContactsFoundException;
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FriendService {
 
     @Autowired
