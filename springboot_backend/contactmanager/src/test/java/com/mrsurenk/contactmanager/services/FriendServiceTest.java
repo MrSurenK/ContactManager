@@ -70,5 +70,10 @@ public class FriendServiceTest {
 
     }
 
-
+    //Get friend contact information
+    @Test
+    @DisplayName("Test if account information can be retrieved")
+    public void testAccountInfo() {
+        
+    }
 }
