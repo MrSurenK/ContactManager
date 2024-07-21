@@ -13,9 +13,7 @@ public class FriendService {
 
     @Autowired
     private UserAccountRepo userAccountRepo;
-
-    @Autowired
-    private UserAccount userAccount;
+    
 
     //Method to search for contacts
     public List<UserAccount> searchContacts(String name) {
