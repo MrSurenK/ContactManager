@@ -15,7 +15,7 @@ public class FriendService {
     @Autowired
     private UserAccount userAccount;
 
-    //Class methods to send friend request and add friends to contact table
+    //Method to search for contacts
     public List<UserAccount> searchContacts(String name) {
         List<UserAccount> contacts = userAccountRepo.findByNameContainingIgnoreCase(name);
         if (contacts.isEmpty()) {
@@ -24,5 +24,8 @@ public class FriendService {
             return contacts;
         }
     }
-    
+
+    //Method to access contact information
+
+
 }

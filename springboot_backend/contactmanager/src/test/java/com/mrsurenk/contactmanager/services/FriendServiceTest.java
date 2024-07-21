@@ -1,5 +1,6 @@
 package com.mrsurenk.contactmanager.services;
 
+import com.mrsurenk.contactmanager.exceptions.NoContactsFoundException;
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,11 +35,13 @@ public class FriendServiceTest {
 
     @BeforeEach
     public void setUp() {
+        account1 = new UserAccount();
         account1.setName("John");
+        account2 = new UserAccount();
         account2.setName("Jonathan");
     }
 
-    // Method 1: Send friend request
+    // Test search for friend
     @Test
     @DisplayName("Test if user can find friend")
     public void searchTest() {
@@ -51,6 +55,19 @@ public class FriendServiceTest {
         assertNotNull(results);
         assertEquals("Jonathan", results.get(1).getName());
         assertNotEquals("John", results.get(1).getName());
+    }
+
+    @Test
+    @DisplayName("Test if no such contact exists")
+    public void noContactInSearch() {
+        //arrange
+        when(userAccountRepo.findByNameContainingIgnoreCase((anyString()))).thenReturn(new ArrayList<>());
+
+        //act and assert
+        assertThrows(NoContactsFoundException.class, () -> {
+            friendService.searchContacts("Sarah");
+        });
+
     }
 
 
