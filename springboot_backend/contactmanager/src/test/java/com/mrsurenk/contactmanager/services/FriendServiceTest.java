@@ -65,7 +65,7 @@ public class FriendServiceTest {
 
         //act and assert
         assertThrows(NoContactsFoundException.class, () ->
-            friendService.searchContacts("Sarah");
+                friendService.searchContacts("Sarah")
         );
 
     }
