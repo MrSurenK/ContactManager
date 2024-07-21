@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class ContactmanagerApplicationTests {
 
-	@Test
-	void contextLoads() {
+    @Test
+    void contextLoads() {
         assertTrue(true);
-	}
-
+    }
 }
