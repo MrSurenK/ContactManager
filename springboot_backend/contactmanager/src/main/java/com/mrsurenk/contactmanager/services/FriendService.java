@@ -42,4 +42,5 @@ public class FriendService {
 
 }
 
-//ToDo: Create a DTO to view certain fields of friend account so that selected fields only are shown.
+
+

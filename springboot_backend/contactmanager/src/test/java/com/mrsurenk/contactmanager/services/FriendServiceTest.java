@@ -1,5 +1,6 @@
 package com.mrsurenk.contactmanager.services;
 
+import com.mrsurenk.contactmanager.dto.UserAccountDTO;
 import com.mrsurenk.contactmanager.exceptions.NoContactsFoundException;
 import com.mrsurenk.contactmanager.models.UserAccount;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
@@ -11,9 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -75,12 +74,21 @@ public class FriendServiceTest {
     @DisplayName("Test if account information can be retrieved")
     public void testAccountInfo() {
         //arrange
-        when(userAccountRepo.findById(id)).thenReturn(123);
+        UUID id = UUID.randomUUID();
+        account1.setEmail("test@gmail.com");
+        account1.setContact("+6588612344");
+        when(userAccountRepo.findById(id)).thenReturn(Optional.of(account1));
 
         //act
+        UserAccountDTO acc = friendService.getAccountInfo(id);
         
 
         //assert
+        assertNotNull(acc);
+        assertEquals("John", acc.name());
+        assertEquals("test@gmail.com",acc.email());
+        assertEquals("+6588612344",acc.contact());
+        //ToDO: assert to test display picture is set
 
     }
 }
