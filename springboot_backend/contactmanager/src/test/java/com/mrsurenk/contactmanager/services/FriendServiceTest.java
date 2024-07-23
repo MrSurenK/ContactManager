@@ -2,7 +2,9 @@ package com.mrsurenk.contactmanager.services;
 
 import com.mrsurenk.contactmanager.dto.UserAccountDTO;
 import com.mrsurenk.contactmanager.exceptions.NoContactsFoundException;
+import com.mrsurenk.contactmanager.models.Contacts;
 import com.mrsurenk.contactmanager.models.UserAccount;
+import com.mrsurenk.contactmanager.repos.ContactsRepo;
 import com.mrsurenk.contactmanager.repos.UserAccountRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +26,9 @@ public class FriendServiceTest {
     //TDD principles
     @Mock
     private UserAccountRepo userAccountRepo;
+
+    @Mock
+    private ContactsRepo contactsRepo;
 
     @InjectMocks
     private FriendService friendService;
@@ -75,6 +80,7 @@ public class FriendServiceTest {
     public void testAccountInfo() {
         //arrange
         UUID id = UUID.randomUUID();
+        account1.setId(id);
         account1.setEmail("test@gmail.com");
         account1.setContact("+6588612344");
         when(userAccountRepo.findById(id)).thenReturn(Optional.of(account1));
@@ -85,10 +91,23 @@ public class FriendServiceTest {
 
         //assert
         assertNotNull(acc);
+        assertEquals(id, acc.id());
         assertEquals("John", acc.name());
         assertEquals("test@gmail.com",acc.email());
         assertEquals("+6588612344",acc.contact());
         //ToDO: assert to test display picture is set
 
     }
+
+
+    //Create contact object and send friend request
+    @Test
+    @DisplayName("Test if contact object is created and request can be sent")
+    public void testFriendRequest(){
+        //arrange
+
+
+
+    }
+
 }
